@@ -127,7 +127,7 @@ class _MyHomePageState extends State<MyHomePage> {
       setState(() {
         yourLives = maxLives;
         enemiesLives = maxLives;
-        gameState = "";
+        gameState = "Draw";
       });
     } else {
       if (attackingBodyPart != BodyPart.none &&
