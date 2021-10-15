@@ -325,8 +325,8 @@ class ControlsWidget extends StatelessWidget {
               ),
               const SizedBox(height: 14),
               BodyPartButton(
-                bodyPart: BodyPart.torse,
-                selected: defendingBodyPart == BodyPart.torse,
+                bodyPart: BodyPart.torso,
+                selected: defendingBodyPart == BodyPart.torso,
                 bodyPartSetter: selectDefendingBodyPart,
               ),
             ],
@@ -352,8 +352,8 @@ class ControlsWidget extends StatelessWidget {
               ),
               const SizedBox(height: 14),
               BodyPartButton(
-                bodyPart: BodyPart.torse,
-                selected: attackingBodyPart == BodyPart.torse,
+                bodyPart: BodyPart.torso,
+                selected: attackingBodyPart == BodyPart.torso,
                 bodyPartSetter: selectAttackingBodyPart,
               ),
             ],
@@ -371,7 +371,7 @@ class BodyPart {
   const BodyPart._(this.name);
 
   static const head = BodyPart._("Head");
-  static const torse = BodyPart._("Torso");
+  static const torso = BodyPart._("Torso");
   static const legs = BodyPart._("Legs");
   static const none = BodyPart._("None");
 
@@ -380,7 +380,7 @@ class BodyPart {
     return 'BodyPart{name: $name}';
   }
 
-  static const List<BodyPart> _values = [head, torse, legs];
+  static const List<BodyPart> _values = [head, torso, legs];
 
   static BodyPart random() {
     return _values[Random().nextInt(_values.length)];
