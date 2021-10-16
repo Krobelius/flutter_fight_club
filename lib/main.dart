@@ -37,8 +37,8 @@ class MyHomePageState extends State<MyHomePage> {
 
   BodyPart? defendingBodyPart = BodyPart.none;
   BodyPart? attackingBodyPart = BodyPart.none;
-  BodyPart? whatEnemyAttacks = BodyPart.random();
-  BodyPart? whatEnemyDefends = BodyPart.random();
+  BodyPart whatEnemyAttacks = BodyPart.random();
+  BodyPart whatEnemyDefends = BodyPart.random();
 
   int yourLives = maxLives;
   int enemiesLives = maxLives;
@@ -153,7 +153,7 @@ class MyHomePageState extends State<MyHomePage> {
             if (yourLives == 0) {
               gameState = yourLives == 0 && enemiesLives == 0 ? "Draw" : "You lost";
             } else {
-              gameState += enemiesLives == 0 ? "" : "Enemy hit your " + whatEnemyAttacks!.name.toLowerCase() + ".\n";
+              gameState += enemiesLives == 0 ? "" : "Enemy hit your " + whatEnemyAttacks.name.toLowerCase() + ".\n";
             }
           } else {
             gameState += enemiesLives == 0 ? "" : "Enemy’s attack was blocked.";
