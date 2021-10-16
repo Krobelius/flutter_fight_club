@@ -41,7 +41,7 @@ class MyHomePageState extends State<MyHomePage> {
   BodyPart whatEnemyDefends = BodyPart.random();
 
   int yourLives = maxLives;
-  int enemiesLives = maxLives;
+  int enemysLives = maxLives;
 
   String gameState = "";
 
@@ -55,7 +55,7 @@ class MyHomePageState extends State<MyHomePage> {
             FightersInfo(
                 maxLivesCount: maxLives,
                 yourLivesCount: yourLives,
-                enemiesLivesCount: enemiesLives),
+                enemiesLivesCount: enemysLives),
             Expanded(
                 child: SizedBox(
               width: double.infinity,
@@ -81,7 +81,7 @@ class MyHomePageState extends State<MyHomePage> {
                 selectAttackingBodyPart: _selectAttackingBodyPart),
             const SizedBox(height: 14),
             GoButton(
-                text: yourLives == 0 || enemiesLives == 0
+                text: yourLives == 0 || enemysLives == 0
                     ? "Start new game"
                     : "Go",
                 onTap: _setGameState,
@@ -94,7 +94,7 @@ class MyHomePageState extends State<MyHomePage> {
   }
 
   Color _getColorForGo() {
-    if (yourLives == 0 || enemiesLives == 0) {
+    if (yourLives == 0 || enemysLives == 0) {
       return FightClubColors.blackButton;
     } else if (attackingBodyPart == BodyPart.none ||
         defendingBodyPart == BodyPart.none) {
@@ -105,7 +105,7 @@ class MyHomePageState extends State<MyHomePage> {
   }
 
   void _selectDefendingBodyPart(final BodyPart value) {
-    if (yourLives == 0 || enemiesLives == 0) {
+    if (yourLives == 0 || enemysLives == 0) {
       return;
     }
     setState(() {
@@ -114,7 +114,7 @@ class MyHomePageState extends State<MyHomePage> {
   }
 
   void _selectAttackingBodyPart(final BodyPart value) {
-    if (yourLives == 0 || enemiesLives == 0) {
+    if (yourLives == 0 || enemysLives == 0) {
       return;
     }
     setState(() {
@@ -123,10 +123,10 @@ class MyHomePageState extends State<MyHomePage> {
   }
 
   void _setGameState() {
-    if (yourLives == 0 || enemiesLives == 0) {
+    if (yourLives == 0 || enemysLives == 0) {
       setState(() {
         yourLives = maxLives;
-        enemiesLives = maxLives;
+        enemysLives = maxLives;
         gameState = "";
       });
     } else {
@@ -138,8 +138,8 @@ class MyHomePageState extends State<MyHomePage> {
           final bool yourLoseLife = defendingBodyPart != whatEnemyAttacks;
 
           if (enemyLoseLife) {
-            enemiesLives -= 1;
-            if (enemiesLives == 0) {
+            enemysLives -= 1;
+            if (enemysLives == 0) {
               gameState = "You won";
             } else {
               gameState = "You hit enemy’s " + attackingBodyPart!.name.toLowerCase() + ".\n";
@@ -151,12 +151,12 @@ class MyHomePageState extends State<MyHomePage> {
           if (yourLoseLife) {
             yourLives -= 1;
             if (yourLives == 0) {
-              gameState = yourLives == 0 && enemiesLives == 0 ? "Draw" : "You lost";
+              gameState = yourLives == 0 && enemysLives == 0 ? "Draw" : "You lost";
             } else {
-              gameState += enemiesLives == 0 ? "" : "Enemy hit your " + whatEnemyAttacks.name.toLowerCase() + ".\n";
+              gameState += enemysLives == 0 ? "" : "Enemy hit your " + whatEnemyAttacks.name.toLowerCase() + ".\n";
             }
           } else {
-            gameState += enemiesLives == 0 ? "" : "Enemy’s attack was blocked.";
+            gameState += enemysLives == 0 ? "" : "Enemy’s attack was blocked.";
           }
 
           whatEnemyDefends = BodyPart.random();
