@@ -127,7 +127,7 @@ class _MyHomePageState extends State<MyHomePage> {
       setState(() {
         yourLives = maxLives;
         enemiesLives = maxLives;
-        gameState = "Draw";
+        gameState = "";
       });
     } else {
       if (attackingBodyPart != BodyPart.none &&
@@ -151,7 +151,7 @@ class _MyHomePageState extends State<MyHomePage> {
           if (yourLoseLife) {
             yourLives -= 1;
             if (yourLives == 0) {
-              gameState = "You lost";
+              gameState = yourLives == 0 && enemiesLives == 0 ? "Draw" : "You lost";
             } else {
               gameState += enemiesLives == 0 ? "" : "Enemy hit your " + whatEnemyAttacks!.name.toLowerCase() + ".\n";
             }
@@ -407,7 +407,7 @@ class LivesWidget extends StatelessWidget {
       children: List.generate(overallLivesCount, (index) {
         if (index < currentLivesCount) {
           return Padding(
-            padding: const EdgeInsets.only(bottom: 3.0),
+            padding: const EdgeInsets.only(bottom: 3.0,top: 0),
             child: Image.asset(
               FightClubIcons.heartFull,
               width: 18,
@@ -416,7 +416,7 @@ class LivesWidget extends StatelessWidget {
           );
         } else {
           return Padding(
-            padding: const EdgeInsets.only(bottom: 3.0),
+            padding: const EdgeInsets.only(bottom: 3.0,top: 0),
             child: Image.asset(
               FightClubIcons.heartEmpty,
               width: 18,
