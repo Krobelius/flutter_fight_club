@@ -153,7 +153,7 @@ class MyHomePageState extends State<MyHomePage> {
             if (yourLives == 0) {
               gameState = yourLives == 0 && enemysLives == 0 ? "Draw" : "You lost";
             } else {
-              gameState += enemysLives == 0 ? "" : "Enemy hit your " + whatEnemyAttacks.name.toLowerCase() + ".\n";
+              gameState += enemysLives == 0 ? "" : "Enemy hit your " + whatEnemyAttacks.name.toLowerCase() + ".";
             }
           } else {
             gameState += enemysLives == 0 ? "" : "Enemy’s attack was blocked.";
