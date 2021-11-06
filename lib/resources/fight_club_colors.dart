@@ -11,4 +11,5 @@ class FightClubColors {
   static const greyButton = Color(0x60000000);
   static const blueButton = Color(0xFF1C79CE);
   static const blackButton = Color(0xDE000000);
+  static const darkPurple = Color(0xFFC5D1EA);
 }
