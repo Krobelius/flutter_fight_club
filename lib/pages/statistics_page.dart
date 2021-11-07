@@ -24,57 +24,47 @@ class StatisticsPage extends StatelessWidget {
                     fontSize: 24),
               ),
             ),
-            Center(
-              child: Column(
-                children: [
-                  FutureBuilder(
-                      future: _getStat("won"),
-                      builder: (context, snap) {
-                        if (!snap.hasData || snap.data == null) {
-                          return const Padding(
-                            padding: EdgeInsets.symmetric(vertical: 6.0),
-                            child: Text("Won: 0"),
-                          );
-                        } else {
-                          return Padding(
-                              padding:
-                              const EdgeInsets.symmetric(vertical: 6.0),
-                              child: Text("Won: " + snap.data.toString()));
-                        }
-                      }),
-                  FutureBuilder(
-                      future: _getStat("draw"),
-                      builder: (context, snap) {
-                        if (!snap.hasData || snap.data == null) {
-                          return const Padding(
-                            padding: EdgeInsets.symmetric(vertical: 6.0),
-                            child: Text("Draw: 0"),
-                          );
-                        } else {
-                          return Padding(
-                              padding:
-                              const EdgeInsets.symmetric(vertical: 6.0),
-                              child: Text("Draw: " + snap.data.toString()));
-                        }
-                      }),
-                  FutureBuilder(
-                      future: _getStat("lost"),
-                      builder: (context, snap) {
-                        if (!snap.hasData || snap.data == null) {
-                          return const Padding(
-                            padding: EdgeInsets.symmetric(vertical: 6.0),
-                            child: Text("Lost: 0"),
-                          );
-                        } else {
-                          return Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 6.0),
-                              child: Text("Lost: " + snap.data.toString()));
-                        }
-                      }),
-                ],
-              ),
+            const Expanded(child: SizedBox.shrink()),
+            FutureBuilder<SharedPreferences>(
+              future: SharedPreferences.getInstance(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData || snapshot.data == null) {
+                  return const SizedBox();
+                } else {
+                  final SharedPreferences sp = snapshot.data!;
+                  return Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        "Won: ${sp.getInt("stats_won") ?? 0}",
+                        style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                            color: FightClubColors.darkGreyText),
+                      ),
+                      const SizedBox(height: 6),
+                      Text(
+                        "Lost: ${sp.getInt("stats_lost") ?? 0}",
+                        style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                            color: FightClubColors.darkGreyText),
+                      ),
+                      const SizedBox(height: 6),
+                      Text(
+                        "Draw: ${sp.getInt("stats_draw") ?? 0}",
+                        style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                            color: FightClubColors.darkGreyText),
+                      ),
+                      const SizedBox(height: 6),
+                    ],
+                  );
+                }
+              },
             ),
+            const Expanded(child: SizedBox.shrink()),
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: SecondaryActionButton(
@@ -84,12 +74,5 @@ class StatisticsPage extends StatelessWidget {
         ),
       ),
     );
-  }
-
- Future _getStat(String name) {
-    return(SharedPreferences.getInstance().then(
-            (sharedPreferences) =>
-            sharedPreferences.getInt("stats_"+name)
-    ));
   }
 }

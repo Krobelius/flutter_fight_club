@@ -42,27 +42,19 @@ class _MainPageContent extends StatelessWidget {
                 if (!snapshot.hasData || snapshot.data == null) {
                   return const SizedBox();
                 } else {
-                  FightResult result = FightResult.won;
-                  if(snapshot.data == "Won") {
-                    result = FightResult.won;
-                  } else {
-                    result = snapshot.data == "Draw" ?  FightResult.draw : FightResult.lost;
-                  }
+                  final FightResult fightResult = FightResult.getByName(snapshot.data!);
                   return Column(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      const Padding(
-                        padding: EdgeInsets.all(12.0),
-                        child: Center(
-                          child: Text(
-                            "Last fight result",
-                            style: TextStyle(
-                                fontWeight: FontWeight.w400,
-                                fontSize: 14,
-                                color: FightClubColors.darkGreyText),
-                          ),
-                        ),
+                      const Text(
+                        "Last fight result",
+                        style: TextStyle(
+                            fontWeight: FontWeight.w400,
+                            fontSize: 14,
+                            color: FightClubColors.darkGreyText),
                       ),
-                      FightResultWidget(fightResult: result),
+                      const SizedBox(height: 12),
+                      FightResultWidget(fightResult: fightResult),
                     ],
                   );
                 }

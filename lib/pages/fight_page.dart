@@ -150,19 +150,9 @@ class FightPageState extends State<FightPage> {
           if(fightResult != null) {
             SharedPreferences.getInstance().then((sharedPreferences){
               sharedPreferences.setString("last_fight_result", fightResult.result);
-            });
-            SharedPreferences.getInstance().then((share) {
-              return share.getInt("stats_"+fightResult.toString().toLowerCase());
-            }).then((value) {
-              if(value != null) {
-                SharedPreferences.getInstance().then((share) {
-                  share.setInt("stats_"+fightResult.toString().toLowerCase(), value+1);
-                });
-              } else {
-                SharedPreferences.getInstance().then((share) {
-                  share.setInt("stats_"+fightResult.toString().toLowerCase(), 1);
-                });
-              }
+              final String key = "stats_${fightResult.result.toLowerCase()}";
+              final int currentValue = sharedPreferences.getInt(key) ?? 0;
+              sharedPreferences.setInt(key, currentValue + 1);
             });
           }
 
