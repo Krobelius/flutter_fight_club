@@ -20,6 +20,6 @@ class FightResult {
 
   @override
   String toString() {
-    return 'FightResult{result: $result}';
+    return result;
   }
 }
