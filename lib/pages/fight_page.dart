@@ -155,7 +155,6 @@ class FightPageState extends State<FightPage> {
               return share.getInt("stats_"+fightResult.toString().toLowerCase());
             }).then((value) {
               if(value != null) {
-                print(value);
                 SharedPreferences.getInstance().then((share) {
                   share.setInt("stats_"+fightResult.toString().toLowerCase(), value+1);
                 });
