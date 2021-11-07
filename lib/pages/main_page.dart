@@ -34,39 +34,39 @@ class _MainPageContent extends StatelessWidget {
                       fontSize: 30, color: FightClubColors.darkGreyText)),
             ),
             const Expanded(child: SizedBox()),
-            Column(
-              children: [
-                const Padding(
-                  padding: EdgeInsets.all(12.0),
-                  child: Center(
-                    child: Text(
-                      "Last fight result",
-                      style: TextStyle(
-                          fontWeight: FontWeight.w400,
-                          fontSize: 14,
-                          color: FightClubColors.darkGreyText),
-                    ),
-                  ),
-                ),
-                FutureBuilder<String?>(
-                  future: SharedPreferences.getInstance().then(
-                          (sharedPreferences) =>
-                          sharedPreferences.getString("last_fight_result")),
-                  builder: (context, snapshot) {
-                    if (!snapshot.hasData || snapshot.data == null) {
-                      return const SizedBox();
-                    } else {
-                      FightResult result = FightResult.won;
-                      if(snapshot.data == "Won") {
-                        result = FightResult.won;
-                      } else {
-                        result = snapshot.data == "Draw" ?  FightResult.draw : FightResult.lost;
-                      }
-                      return FightResultWidget(fightResult: result);
-                    }
-                  },
-                ),
-              ],
+            FutureBuilder<String?>(
+              future: SharedPreferences.getInstance().then(
+                      (sharedPreferences) =>
+                      sharedPreferences.getString("last_fight_result")),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData || snapshot.data == null) {
+                  return const SizedBox();
+                } else {
+                  FightResult result = FightResult.won;
+                  if(snapshot.data == "Won") {
+                    result = FightResult.won;
+                  } else {
+                    result = snapshot.data == "Draw" ?  FightResult.draw : FightResult.lost;
+                  }
+                  return Column(
+                    children: [
+                      const Padding(
+                        padding: EdgeInsets.all(12.0),
+                        child: Center(
+                          child: Text(
+                            "Last fight result",
+                            style: TextStyle(
+                                fontWeight: FontWeight.w400,
+                                fontSize: 14,
+                                color: FightClubColors.darkGreyText),
+                          ),
+                        ),
+                      ),
+                      FightResultWidget(fightResult: result),
+                    ],
+                  );
+                }
+              },
             ),
             const Expanded(child: SizedBox()),
             SecondaryActionButton(

@@ -150,6 +150,9 @@ class FightPageState extends State<FightPage> {
           if(fightResult != null) {
             SharedPreferences.getInstance().then((sharedPreferences){
               sharedPreferences.setString("last_fight_result", fightResult.result);
+              return sharedPreferences.getInt("stats_"+fightResult.toString().toLowerCase());
+            }).then((stats) => {
+
             });
           }
 
